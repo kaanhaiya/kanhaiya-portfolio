@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kanhaiya | Portfolio</title>
+
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-card: #111827;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-soft: #1e293b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .hero img {
+      width: 210px;
+      height: 210px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      margin-bottom: 16px;
+      animation: photoFloat 4s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    @keyframes photoFloat {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .hero h2 {
+      font-size: 1.05rem;
+      font-weight: normal;
+      color: var(--text-muted);
+      margin: 8px 0 14px;
+    }
+
+    #about {
+      max-width: 720px;
+      color: var(--text-muted);
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    section {
+      padding: 30px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    section h2 {
+      font-size: 1.9rem;
+      margin-bottom: 26px;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .skill {
+      background: var(--bg-card);
+      padding: 18px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(56,189,248,0.2);
+    }
+
+    /* PROJECTS GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 30px;
+    }
+
+    .project {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 26px;
+    }
+
+    .project-number {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .project h3 {
+      color: var(--accent);
+      margin-top: 0;
+    }
+
+    .project p {
+      color: var(--text-muted);
+    }
+
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .project-gallery img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .project-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 30px rgba(56,189,248,0.25);
+    }
+
+    .project-links {
+      margin-top: 14px;
+    }
+
+    .project-links a {
+  display: inline-block;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  margin-right: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.project-links a:hover {
+  transform: translateY(-5px);
+  color: #7dd3fc;
+  box-shadow: 0 10px 25px rgba(56,189,248,0.25);
+}
+
+
+    .contact {
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px;
+      color: var(--text-muted);
+      background: var(--accent-soft);
+    }
+
+    /* IMAGE MODAL (WhatsApp DP style) */
+    #imgModal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #imgModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+
+    #closeModal {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 32px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero" id="home">
+    <img src="kanhaiya.jpg" alt="Kanhaiya Photo" id="profilePic">
+    <h1>Kanhaiya</h1>
+    <h2>Web Developer | Computer Science Student</h2>
+
+    <p id="about">
+      Hi, I’m Kanhaiya. I’m a B.Tech student in
+      <span class="highlight">Computer Science and Engineering</span> at
+      <span class="highlight">OmDayal Group of Institutions</span>,
+      affiliated with <span class="highlight">MAKAUT University</span>.
+      I like building things with code and figuring out how technology actually works behind the scenes.
+    </p>
+  </div>
+
+  <section>
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill">HTML</div>
+      <div class="skill">CSS</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">Python</div>
+      <div class="skill">Java</div>
+      <div class="skill">GitHub</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+
+    <div class="projects-grid">
+
+      <div class="project">
+  <div class="project-number">Project 01</div>
+  <h3>Personal Portfolio Website</h3>
+
+  <p>
+    This is my personal portfolio website where I show my skills,
+    projects, and learning journey.
+  </p>
+
+  <!-- ADD FROM HERE -->
+  <p style="margin-top:8px; font-size:0.9rem; color: var(--text-muted);">
+    <strong>Type:</strong> Personal Project
+  </p>
+
+  <p style="margin-top:4px; font-size:0.9rem; color: var(--text-muted);">
+    <strong>Tech:</strong> HTML, CSS
+  </p>
+
+  <p style="margin-top:8px; font-size:0.9rem; color: var(--text-muted);">
+   
+  </p>
+  <!-- ADD TILL HERE -->
+
+  <!-- Image & video (jab ready ho tab use karo) -->
+  <div class="project-gallery">
+    
+    <img src="project1-image1.jpg" class="project-img">
+    
+
+
+  </div>
+
+  <video controls style="margin-top:20px; width:100%; border-radius:12px;">
+    <source src="project1-video.mp4" type="video/mp4">
+  </video>
+
+       <div class="project-links">
+  <a href="#home">🔗 View This Portfolio</a>
+  <a href="#">💻 Source Code</a>
+</div>
+      </div>
+
+      <div class="project">
+        <div class="project-number">Project 02</div>
+        <h3>Footstep Power Generation System</h3>
+        <p>
+   This project shows how human footsteps can produce electrical energy.
+Using sensors and simple electronic parts, mechanical pressure is transformed into electrical energy when a person crosses the platform.
+The output is then displayed via connected modules using the generated power.
+  </p>
+
+  <!-- ADD FROM HERE -->
+  <p style="margin-top:8px; font-size:0.9rem; color: var(--text-muted);">
+    <strong>Type:</strong> Hardware Project
+  </p>
+
+  <p style="margin-top:4px; font-size:0.9rem; color: var(--text-muted);">
+    <strong>Components:</strong> Piezo Sensors, Arduino, LCD Display, Basic Electronics
+  </p>
+
+  <p style="margin-top:8px; font-size:0.9rem; color: var(--text-muted);">
+   
+  </p>
+  <!-- ADD TILL HERE -->
+
+  <!-- Image & video (jab ready ho tab use karo) -->
+  <div class="project-gallery">
+    <img src="project2-image1.jpg" class="project-img">
+   <img src="project2-image2.jpg" class="project-img">
+
+  </div>
+
+  <video controls style="margin-top:20px; width:100%; border-radius:12px;">
+    <source src="project2-video.mp4" type="video/mp4">
+  </video>
+
+       
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact">
+    <p>Want to connect with me?</p>
+    <p>
+      Email: <a href="mailto:kanhaiyamandal22222@example.com">
+  kanhaiyamandal22222@example.com
+</a><br>
+      GitHub: <a href="https://github.com/kaanhaiya">
+  github.com/kaanhaiya
+</a>
+    </p>
+  </section>
+
+  <footer>
+    © 2026 Kanhaiya · Built with HTML & CSS
+  </footer>
+
+  <!-- IMAGE MODAL -->
+  <div id="imgModal">
+    <span id="closeModal">&times;</span>
+    <img id="modalImg">
+  </div>
+
+  <script>
+  const profilePic = document.getElementById("profilePic");
+  const imgModal = document.getElementById("imgModal");
+  const modalImg = document.getElementById("modalImg");
+  const closeModal = document.getElementById("closeModal");
+
+  // Profile photo fullscreen
+  profilePic.onclick = () => {
+    imgModal.style.display = "flex";
+    modalImg.src = profilePic.src;
+  };
+
+  closeModal.onclick = () => imgModal.style.display = "none";
+  imgModal.onclick = () => imgModal.style.display = "none";
+
+  // ✅ ADD THIS PART (Project images fullscreen)
+  const projectImages = document.querySelectorAll(".project-img");
+
+  projectImages.forEach(img => {
+    img.addEventListener("click", () => {
+      imgModal.style.display = "flex";
+      modalImg.src = img.src;
+    });
+  });
+</script>
+
+
+</body>
+</html>
