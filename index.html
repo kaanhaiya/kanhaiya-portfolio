@@ -218,6 +218,18 @@
     @media (max-width: 768px) {
       .hero h1 { font-size: 2rem; }
       .projects-grid { grid-template-columns: 1fr; }
+      @media (max-width: 768px) {
+  .hero {
+    min-height: auto;        /* vh problem fix */
+    padding-top: 60px;       /* top gap control */
+    padding-bottom: 40px;    /* bottom gap control */
+  }
+
+  section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
     }
   </style>
 </head>
